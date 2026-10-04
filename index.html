@@ -1,0 +1,1160 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Второе ДЗ — Домашняя робототехника</title>
+
+    <style>
+        :root {
+            --bg: #f4f6f8;
+            --card: #ffffff;
+            --text: #17202a;
+            --muted: #667085;
+            --accent: #2563eb;
+            --accent-dark: #1d4ed8;
+            --green: #16a34a;
+            --orange: #ea580c;
+            --border: #e2e8f0;
+            --code: #111827;
+            --code-text: #e5e7eb;
+            --shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            width: min(1100px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+
+        header {
+            background:
+                radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.25), transparent 35%),
+                linear-gradient(135deg, #111827, #1e293b);
+            color: white;
+            padding: 70px 0 60px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 6px 12px;
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 999px;
+            font-size: 13px;
+            margin-bottom: 18px;
+            color: #dbeafe;
+        }
+
+        header h1 {
+            font-size: clamp(36px, 6vw, 64px);
+            line-height: 1.05;
+            margin: 0 0 20px;
+        }
+
+        header p {
+            max-width: 760px;
+            color: #cbd5e1;
+            font-size: 18px;
+            margin: 0;
+        }
+
+        /* NAV */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(255,255,255,.94);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+
+        .nav-inner a {
+            white-space: nowrap;
+            padding: 8px 12px;
+            border-radius: 8px;
+            color: #475569;
+            font-size: 14px;
+        }
+
+        .nav-inner a:hover {
+            background: #eff6ff;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* MAIN */
+
+        main {
+            padding: 40px 0 80px;
+        }
+
+        section {
+            margin-bottom: 48px;
+            scroll-margin-top: 75px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+        }
+
+        h2 {
+            font-size: 30px;
+            margin: 0 0 20px;
+        }
+
+        h3 {
+            font-size: 22px;
+            margin-top: 0;
+        }
+
+        .lead {
+            font-size: 18px;
+            color: #475569;
+        }
+
+        /* TASK */
+
+        .task-box {
+            border-left: 5px solid var(--accent);
+            background: #eff6ff;
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .task-box strong {
+            color: #1e40af;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0;
+        }
+
+        .checklist li {
+            margin: 12px 0;
+            padding: 12px 14px;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .checklist input {
+            margin-right: 10px;
+            transform: scale(1.15);
+        }
+
+        /* EXPERIMENTS */
+
+        .experiments {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .experiment {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 5px 20px rgba(15,23,42,.05);
+        }
+
+        .number {
+            display: inline-flex;
+            width: 38px;
+            height: 38px;
+            align-items: center;
+            justify-content: center;
+            background: #dbeafe;
+            color: #1d4ed8;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-bottom: 14px;
+        }
+
+        .experiment h3 {
+            margin-bottom: 8px;
+        }
+
+        .experiment p {
+            color: var(--muted);
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            padding: 5px 9px;
+            border-radius: 999px;
+            background: #f1f5f9;
+            color: #475569;
+            font-size: 12px;
+        }
+
+        /* QUESTIONS */
+
+        .question-group {
+            margin: 25px 0;
+        }
+
+        .question-group h3 {
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .questions {
+            padding-left: 25px;
+        }
+
+        .questions li {
+            margin: 13px 0;
+        }
+
+        .question-card {
+            margin: 14px 0;
+            padding: 15px 17px;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        /* ANSWER AREA */
+
+        textarea {
+            width: 100%;
+            min-height: 110px;
+            resize: vertical;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 12px;
+            font: inherit;
+            margin-top: 10px;
+            background: white;
+        }
+
+        textarea:focus {
+            outline: 2px solid rgba(37,99,235,.2);
+            border-color: var(--accent);
+        }
+
+        /* CODE */
+
+        pre {
+            overflow-x: auto;
+            background: var(--code);
+            color: var(--code-text);
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        code {
+            font-family: Consolas, Monaco, monospace;
+        }
+
+        /* ASSIGNMENTS */
+
+        .assignment {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 16px;
+            margin: 15px 0;
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: white;
+        }
+
+        .assignment-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #dcfce7;
+            color: #15803d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .assignment h4 {
+            margin: 0 0 6px;
+        }
+
+        .assignment p {
+            margin: 0;
+            color: #475569;
+        }
+
+        /* NOTE */
+
+        .note {
+            padding: 18px;
+            border-radius: 12px;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            color: #9a3412;
+            margin: 20px 0;
+        }
+
+        .success {
+            padding: 18px;
+            border-radius: 12px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+            margin-top: 25px;
+        }
+
+        /* SOURCES */
+
+        .sources a {
+            display: block;
+            padding: 12px 15px;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            margin: 8px 0;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111827;
+            color: #94a3b8;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 760px) {
+            .experiments {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            header {
+                padding: 50px 0 45px;
+            }
+
+            h2 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <div class="eyebrow">Домашняя робототехника · Arduino</div>
+
+        <h1>Второе ДЗ</h1>
+
+        <p>
+            Собрать схемы, запрограммировать устройства, разобраться
+            с принципиальными схемами, PWM, аналоговыми входами
+            и датчиками.
+        </p>
+    </div>
+</header>
+
+<nav>
+    <div class="container nav-inner">
+        <a href="#task">Задание</a>
+        <a href="#experiments">Эксперименты</a>
+        <a href="#notebook">Тетрадь</a>
+        <a href="#questions">Вопросы</a>
+        <a href="#assignments">Самостоятельная работа</a>
+        <a href="#sources">Материалы</a>
+    </div>
+</nav>
+
+<main>
+
+    <!-- ЗАДАНИЕ -->
+
+    <section id="task">
+        <div class="container">
+
+            <div class="card">
+
+                <h2>Что нужно сделать</h2>
+
+                <p class="lead">
+                    Выполнить практическую работу по четырём экспериментам
+                    Arduino и подготовить результаты в тетради.
+                </p>
+
+                <div class="task-box">
+                    <strong>Второе ДЗ:</strong><br>
+                    Собрать схему, запрограммировать.
+                    В тетрадке перерисовать принципиальную схему
+                    и схему на макетке.
+                    Найти ответы на 3 самых интересных вопроса
+                    из блока «Вопросы для проверки себя»
+                    и решить задания для самостоятельного решения.
+                </div>
+
+                <h3>Чек-лист</h3>
+
+                <ul class="checklist">
+
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            Собрать первую схему — «Маячок»
+                        </label>
+                    </li>
+
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            Запрограммировать и проверить работу маячка
+                        </label>
+                    </li>
+
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            Собрать схему с нарастающей яркостью
+                        </label>
+                    </li>
+
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            Собрать светильник с потенциометром
+                        </label>
+                    </li>
+
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            Собрать терменвокс
+                        </label>
+                    </li>
+
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            Перерисовать принципиальные схемы в тетрадь
+                        </label>
+                    </li>
+
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            Перерисовать схемы на макетной плате
+                        </label>
+                    </li>
+
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            Ответить минимум на 3 вопроса для самопроверки
+                        </label>
+                    </li>
+
+                    <li>
+                        <label>
+                            <input type="checkbox">
+                            Выполнить задания для самостоятельного решения
+                        </label>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ЭКСПЕРИМЕНТЫ -->
+
+    <section id="experiments">
+        <div class="container">
+
+            <h2>Четыре эксперимента</h2>
+
+            <div class="experiments">
+
+                <article class="experiment">
+
+                    <div class="number">1</div>
+
+                    <h3>Маячок</h3>
+
+                    <p>
+                        Простое управление светодиодом:
+                        включение, выключение и задержка.
+                    </p>
+
+                    <div class="tags">
+                        <span class="tag">digitalWrite</span>
+                        <span class="tag">pinMode</span>
+                        <span class="tag">HIGH / LOW</span>
+                        <span class="tag">delay</span>
+                    </div>
+
+                </article>
+
+
+                <article class="experiment">
+
+                    <div class="number">2</div>
+
+                    <h3>Маячок с нарастающей яркостью</h3>
+
+                    <p>
+                        Управление яркостью светодиода
+                        с использованием широтно-импульсной модуляции.
+                    </p>
+
+                    <div class="tags">
+                        <span class="tag">PWM</span>
+                        <span class="tag">analogWrite</span>
+                        <span class="tag">#define</span>
+                        <span class="tag">0–255</span>
+                    </div>
+
+                </article>
+
+
+                <article class="experiment">
+
+                    <div class="number">3</div>
+
+                    <h3>Светильник с управляемой яркостью</h3>
+
+                    <p>
+                        Изменение яркости светодиода
+                        с помощью потенциометра и аналогового входа.
+                    </p>
+
+                    <div class="tags">
+                        <span class="tag">analogRead</span>
+                        <span class="tag">A0</span>
+                        <span class="tag">потенциометр</span>
+                        <span class="tag">PWM</span>
+                    </div>
+
+                </article>
+
+
+                <article class="experiment">
+
+                    <div class="number">4</div>
+
+                    <h3>Терменвокс</h3>
+
+                    <p>
+                        Бесконтактное управление высотой звука
+                        с помощью фоторезистора и пьезопищалки.
+                    </p>
+
+                    <div class="tags">
+                        <span class="tag">LDR</span>
+                        <span class="tag">analogRead</span>
+                        <span class="tag">map</span>
+                        <span class="tag">tone</span>
+                    </div>
+
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ТЕТРАДЬ -->
+
+    <section id="notebook">
+        <div class="container">
+
+            <div class="card">
+
+                <h2>Что должно быть в тетради</h2>
+
+                <p>
+                    Для каждого эксперимента сделай две схемы:
+                </p>
+
+                <ol>
+                    <li>
+                        <strong>Принципиальная схема</strong> —
+                        электрические соединения условными обозначениями.
+                    </li>
+
+                    <li>
+                        <strong>Схема на макетке</strong> —
+                        как реальные компоненты расположены
+                        и соединены на breadboard.
+                    </li>
+                </ol>
+
+                <div class="note">
+                    <strong>Важно:</strong>
+                    при сборке схемы со светодиодом обязательно используй
+                    токоограничивающий резистор. В исходном эксперименте
+                    «Маячок» используется резистор 220 Ом.
+                </div>
+
+                <h3>Полезно понимать</h3>
+
+                <ul>
+                    <li>что такое GND;</li>
+                    <li>где анод и катод светодиода;</li>
+                    <li>зачем нужен резистор;</li>
+                    <li>чем цифровой сигнал отличается от аналогового;</li>
+                    <li>что такое PWM;</li>
+                    <li>что делают <code>digitalWrite()</code>,
+                        <code>analogWrite()</code> и
+                        <code>analogRead()</code>.</li>
+                </ul>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ВОПРОСЫ -->
+
+    <section id="questions">
+        <div class="container">
+
+            <div class="card">
+
+                <h2>Вопросы для проверки себя</h2>
+
+                <p class="lead">
+                    Выбери минимум <strong>3 вопроса</strong>,
+                    которые показались тебе наиболее интересными,
+                    и письменно ответь на них.
+                </p>
+
+
+                <!-- МАЯЧОК -->
+
+                <div class="question-group">
+
+                    <h3>1. Маячок</h3>
+
+                    <ol class="questions">
+
+                        <li>
+                            Что будет, если подключить к земле
+                            анод светодиода вместо катода?
+                        </li>
+
+                        <li>
+                            Что будет, если подключить светодиод
+                            с резистором большого номинала, например 10 кОм?
+                        </li>
+
+                        <li>
+                            Что будет, если подключить светодиод
+                            без резистора?
+                        </li>
+
+                        <li>
+                            Зачем нужна функция <code>pinMode()</code>?
+                            Какие параметры она принимает?
+                        </li>
+
+                        <li>
+                            Зачем нужна функция <code>digitalWrite()</code>?
+                            Какие параметры она принимает?
+                        </li>
+
+                        <li>
+                            С помощью какой функции можно заставить
+                            микроконтроллер ничего не делать?
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <!-- PWM -->
+
+                <div class="question-group">
+
+                    <h3>2. Маячок с нарастающей яркостью</h3>
+
+                    <ol class="questions">
+
+                        <li>
+                            Какие идентификаторы из списка являются корректными?
+                            <code>13pin</code>,
+                            <code>MOTOR_1</code>,
+                            <code>leftServo</code>,
+                            <code>distance_eval2</code> и другие.
+                        </li>
+
+                        <li>
+                            Что произойдёт, если написать
+                            <code>#define HIGH LOW</code>?
+                        </li>
+
+                        <li>
+                            Почему нельзя регулировать яркость светодиода,
+                            подключённого к порту 7?
+                        </li>
+
+                        <li>
+                            Какое усреднённое напряжение получится
+                            при <code>analogWrite(6, 153)</code>?
+                        </li>
+
+                        <li>
+                            Какое значение нужно передать
+                            <code>analogWrite()</code>, чтобы получить
+                            усреднённое напряжение 2 В?
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <!-- ПОТЕНЦИОМЕТР -->
+
+                <div class="question-group">
+
+                    <h3>3. Светильник с управляемой яркостью</h3>
+
+                    <ol class="questions">
+
+                        <li>
+                            Можно ли подключить светодиод и потенциометр
+                            напрямую к разным входам GND микроконтроллера?
+                        </li>
+
+                        <li>
+                            В какую сторону нужно крутить потенциометр,
+                            чтобы увеличить яркость?
+                        </li>
+
+                        <li>
+                            Что произойдёт, если убрать
+                            <code>pinMode(LED_PIN, OUTPUT)</code>?
+                        </li>
+
+                        <li>
+                            Зачем значение <code>analogRead()</code>
+                            делится на 4 перед передачей в
+                            <code>analogWrite()</code>?
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <!-- ТЕРМЕНВОКС -->
+
+                <div class="question-group">
+
+                    <h3>4. Терменвокс</h3>
+
+                    <ol class="questions">
+
+                        <li>
+                            Каким сопротивлением должен обладать
+                            фоторезистор, чтобы на аналоговый вход
+                            было подано напряжение 1 В?
+                        </li>
+
+                        <li>
+                            Можно ли регулировать яркость светодиода
+                            на 11-м порту во время звучания пьезопищалки?
+                        </li>
+
+                        <li>
+                            Что изменится, если заменить резистор 10 кОм
+                            на резистор 100 кОм?
+                        </li>
+
+                        <li>
+                            Каков результат вызова
+                            <code>map(30, 0, 90, 90, -90)</code>?
+                        </li>
+
+                        <li>
+                            Как работает <code>tone()</code>
+                            без указания длительности?
+                        </li>
+
+                        <li>
+                            Можно ли устроить полифоническое звучание
+                            с помощью функции <code>tone()</code>?
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <div class="success">
+                    <strong>Мой выбор:</strong>
+                    запиши ниже три вопроса, которые ты выбрал,
+                    и кратко сформулируй ответы.
+                </div>
+
+
+                <div class="question-card">
+                    <strong>Вопрос №1</strong>
+                    <textarea
+                        placeholder="Напиши вопрос и свой ответ..."
+                    ></textarea>
+                </div>
+
+                <div class="question-card">
+                    <strong>Вопрос №2</strong>
+                    <textarea
+                        placeholder="Напиши вопрос и свой ответ..."
+                    ></textarea>
+                </div>
+
+                <div class="question-card">
+                    <strong>Вопрос №3</strong>
+                    <textarea
+                        placeholder="Напиши вопрос и свой ответ..."
+                    ></textarea>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- САМОСТОЯТЕЛЬНЫЕ ЗАДАНИЯ -->
+
+    <section id="assignments">
+        <div class="container">
+
+            <h2>Задания для самостоятельного решения</h2>
+
+            <p class="lead">
+                Выполни задания самостоятельно.
+                Главное — не просто получить работающий код,
+                а понимать, почему он работает.
+            </p>
+
+
+            <div class="assignment">
+
+                <div class="assignment-number">1</div>
+
+                <div>
+                    <h4>Маячок</h4>
+
+                    <p>
+                        Сделай так, чтобы маячок светился полсекунды,
+                        а пауза между вспышками была равна одной секунде.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="assignment">
+
+                <div class="assignment-number">2</div>
+
+                <div>
+                    <h4>Маячок после запуска</h4>
+
+                    <p>
+                        Сделай так, чтобы маячок включался
+                        на три секунды после запуска устройства,
+                        а затем переходил в стандартный режим мигания.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="assignment">
+
+                <div class="assignment-number">3</div>
+
+                <div>
+                    <h4>Нарастающая яркость</h4>
+
+                    <p>
+                        Отключи питание, перенеси светодиод
+                        с 9-го порта на 11-й и измени программу,
+                        чтобы схема снова заработала.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="assignment">
+
+                <div class="assignment-number">4</div>
+
+                <div>
+                    <h4>Пять уровней напряжения</h4>
+
+                    <p>
+                        Измени программу так, чтобы в течение секунды
+                        на светодиод последовательно подавались
+                        усреднённые значения 0, 1, 2, 3, 4 и 5 В.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="assignment">
+
+                <div class="assignment-number">5</div>
+
+                <div>
+                    <h4>Два светодиода</h4>
+
+                    <p>
+                        Добавь второй светодиод на пин 3.
+                        Сделай так, чтобы два светодиода работали
+                        в противофазе: когда один выключен,
+                        второй светится максимально ярко.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="assignment">
+
+                <div class="assignment-number">6</div>
+
+                <div>
+                    <h4>Светильник</h4>
+
+                    <p>
+                        Подключи второй светодиод к порту 5.
+                        Измени программу так, чтобы его яркость
+                        была равна 1/8 яркости первого светодиода.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="assignment">
+
+                <div class="assignment-number">7</div>
+
+                <div>
+                    <h4>SOS азбукой Морзе</h4>
+
+                    <p>
+                        Убери чтение датчика освещённости
+                        и заставь пьезопищалку передавать SOS:
+                        три точки, три тире, три точки.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="assignment">
+
+                <div class="assignment-number">8</div>
+
+                <div>
+                    <h4>Обратная зависимость</h4>
+
+                    <p>
+                        Сделай так, чтобы при уменьшении освещённости
+                        звук становился ниже — например,
+                        от 5 кГц до 2,5 кГц.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="assignment">
+
+                <div class="assignment-number">9</div>
+
+                <div>
+                    <h4>Прерывистый терменвокс</h4>
+
+                    <p>
+                        Измени программу так, чтобы звук терменвокса
+                        раздавался 10 раз в секунду
+                        с различимыми паузами.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="success">
+
+                <strong>Результат ДЗ:</strong>
+
+                <ul>
+                    <li>схемы собраны;</li>
+                    <li>программы работают;</li>
+                    <li>схемы перерисованы в тетрадь;</li>
+                    <li>выбраны и разобраны 3 вопроса;</li>
+                    <li>выполнены задания для самостоятельной работы.</li>
+                </ul>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- МАТЕРИАЛЫ -->
+
+    <section id="sources">
+        <div class="container">
+
+            <div class="card sources">
+
+                <h2>Материалы</h2>
+
+                <p>
+                    Основные материалы для выполнения домашнего задания:
+                </p>
+
+                <a
+                    href="https://wiki.amperka.ru/конспект-arduino:маячок"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    → Эксперимент 1. Маячок
+                </a>
+
+                <a
+                    href="https://wiki.amperka.ru/конспект-arduino:маячок-с-нарастающей-яркостью"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    → Эксперимент 2. Маячок с нарастающей яркостью
+                </a>
+
+                <a
+                    href="https://wiki.amperka.ru/конспект-arduino:светильник-с-управляемой-яркостью"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    → Эксперимент 3. Светильник с управляемой яркостью
+                </a>
+
+                <a
+                    href="https://wiki.amperka.ru/конспект-arduino:терменвокс"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    → Эксперимент 4. Терменвокс
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+
+<footer>
+    <div class="container">
+        Домашняя робототехника · Второе ДЗ · Arduino
+    </div>
+</footer>
+
+
+<script>
+    /*
+     * Сохраняем состояние чекбоксов.
+     * Если страницу обновить, выполненные пункты останутся отмеченными.
+     */
+
+    const checkboxes = document.querySelectorAll(
+        '.checklist input[type="checkbox"]'
+    );
+
+    checkboxes.forEach((checkbox, index) => {
+
+        const key = 'robotics-dz2-check-' + index;
+
+        checkbox.checked = localStorage.getItem(key) === 'true';
+
+        checkbox.addEventListener('change', () => {
+            localStorage.setItem(key, checkbox.checked);
+        });
+
+    });
+</script>
+
+</body>
+</html>
+```
