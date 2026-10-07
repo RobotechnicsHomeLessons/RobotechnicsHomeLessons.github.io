@@ -168,7 +168,7 @@ footer { color: var(--muted); font-size: 14px; text-align: center; padding-top: 
           <div class="leds" data-seq="100,010,001" aria-hidden="true"><i class="led"></i><i class="led"></i><i class="led"></i></div>
         </div>
         <p>Светодиоды загораются по очереди: 1 → 2 → 3. Одновременно горит только один.</p>
-        <div class="hint">Подсказка: прежде чем включить следующий, выключи предыдущий. Вспомни «Светофор».</div>
+        <div class="hint">Подсказка: прежде чем включить следующий, выключите предыдущий. Вспомни «Светофор».</div>
         <label class="done"><input type="checkbox" id="t2"> Сделано</label>
       </article>
 
@@ -177,7 +177,7 @@ footer { color: var(--muted); font-size: 14px; text-align: center; padding-top: 
           <h3><span>3</span>Шкала</h3>
           <div class="leds" data-seq="100,110,111,100,110,111,110,100,000" aria-hidden="true"><i class="led"></i><i class="led"></i><i class="led"></i></div>
         </div>
-        <p>Сначала горит 1, потом 1 и 2, потом 1, 2 и 3. повторите это 2 раза, а в конце шкала «уменьшается»: 1+2+3 → 1+2 → 1.</p>
+        <p>Сначала горит 1, потом 1 и 2, потом 1, 2 и 3. Повторите это 2 раза, а в конце шкала «уменьшается»: 1+2+3 → 1+2 → 1.</p>
         <label class="done"><input type="checkbox" id="t3"> Сделано</label>
       </article>
 
@@ -187,7 +187,7 @@ footer { color: var(--muted); font-size: 14px; text-align: center; padding-top: 
           <div class="leds" aria-hidden="true"><small>0 / 1</small></div>
         </div>
         <p>Цифровое значение — это только 0 или 1: свет есть или света нет.</p>
-        <p>Подключите датчик к пину 2 и загрузите <a href="#code2">Код 2</a>. Открой монитор порта.</p>
+        <p>Подключите датчик к пину 2 и загрузите <a href="#code2">Код 2</a>. Откройте монитор порта.</p>
         <ul>
           <li>Какое число вы видите, когда датчик освещён? А когда закрываете его рукой?</li>
           <li>Переподключите датчик к пину 4, а потом к пину 10. Что нужно изменить в коде, чтобы всё снова работало?</li>
@@ -275,7 +275,7 @@ void loop() {
   <section id="notebook">
     <h2>В тетрадь</h2>
     <div class="note">
-      <p>запишите, как устроена команда:</p>
+      <p>Запишите, как устроена команда:</p>
       <div class="formula">digitalWrite(<b>пин</b>, <b>HIGH/LOW</b>)</div>
       <p>Первое поле — <b>куда</b> (номер пина), второе — <b>что сделать</b> (включить или выключить).</p>
       <p>И запишите, к какому пину что было подключено:</p>
