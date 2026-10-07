@@ -158,7 +158,7 @@ footer { color: var(--muted); font-size: 14px; text-align: center; padding-top: 
           <h3><span>1</span>Все вместе</h3>
           <div class="leds" data-seq="111,000" aria-hidden="true"><i class="led"></i><i class="led"></i><i class="led"></i></div>
         </div>
-        <p>Загрузите <a href="#code1">Код 1</a> и убедись, что все три светодиода включаются и выключаются одновременно.</p>
+        <p>Загрузите <a href="#code1">Код 1</a> и убедитесь, что все три светодиода включаются и выключаются одновременно.</p>
         <label class="done"><input type="checkbox" id="t1"> Сделано</label>
       </article>
 
@@ -168,7 +168,7 @@ footer { color: var(--muted); font-size: 14px; text-align: center; padding-top: 
           <div class="leds" data-seq="100,010,001" aria-hidden="true"><i class="led"></i><i class="led"></i><i class="led"></i></div>
         </div>
         <p>Светодиоды загораются по очереди: 1 → 2 → 3. Одновременно горит только один.</p>
-        <div class="hint">Подсказка: прежде чем включить следующий, выключите предыдущий. Вспомни «Светофор».</div>
+        <div class="hint">Подсказка: прежде чем включить следующий, выключите предыдущий. Вспомните «Светофор».</div>
         <label class="done"><input type="checkbox" id="t2"> Сделано</label>
       </article>
 
@@ -265,7 +265,7 @@ void loop() {
 }
 
 // Как посмотреть числа:
-// 1. загрузитете код на плату.
+// 1. Загрузите код на плату.
 // 2. Нажмите на значок лупы в правом верхнем углу Arduino IDE
 //    (Инструменты -&gt; Монитор порта).
 // 3. Внизу окна выберите скорость 9600.</pre>
@@ -326,7 +326,7 @@ document.querySelectorAll('.copy').forEach(function (btn) {
     var fallback = function () {
       var r = document.createRange(); r.selectNodeContents(pre);
       var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-      btn.textContent = 'Нажми Ctrl+C';
+      btn.textContent = 'Нажмите Ctrl+C';
     };
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(ok, fallback);
