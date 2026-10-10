@@ -301,6 +301,106 @@ void loop() {
     </a>
   </section>
 
+
+  <section id="additional-programs">
+    <h2>Дополнительные программы</h2>
+    <p class="lead">Примеры для экспериментов с цифровыми выходами, входами и кнопкой или датчиком. Каждый фрагмент — отдельная программа: загружайте их по одной.</p>
+
+    <div class="code-block">
+      <div class="code-bar"><strong>Программа 1: включить выход 10</strong><button class="copy" type="button" data-target="extra-src1">Скопировать</button></div>
+<pre id="extra-src1">void setup() {
+  pinMode(10, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(10, HIGH);
+}</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-bar"><strong>Программа 2: повторить сигнал с пина 2 на пин 13</strong><button class="copy" type="button" data-target="extra-src2">Скопировать</button></div>
+<pre id="extra-src2">void setup() {
+  pinMode(13, OUTPUT);
+  pinMode(2, INPUT);
+}
+
+void loop() {
+  digitalWrite(13, digitalRead(2));
+}</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-bar"><strong>Программа 3: включить пин 13 при сигнале на пине 2</strong><button class="copy" type="button" data-target="extra-src3">Скопировать</button></div>
+<pre id="extra-src3">void setup() {
+  pinMode(13, OUTPUT);
+  pinMode(2, INPUT);
+}
+
+void loop() {
+  if (digitalRead(2) == 1) {
+    digitalWrite(13, HIGH);
+  }
+}</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-bar"><strong>Программа 4: мигание светодиодом</strong><button class="copy" type="button" data-target="extra-src4">Скопировать</button></div>
+<pre id="extra-src4">void setup() {
+  pinMode(13, OUTPUT);  // настраиваем пин 13 как выход
+}
+
+void loop() {
+  digitalWrite(13, HIGH);  // включаем светодиод
+  delay(700);              // ждём 700 мс
+
+  digitalWrite(13, LOW);   // выключаем светодиод
+  delay(300);              // ждём 300 мс
+
+  // Цикл повторяется: полный период мигания — 1 секунда
+}</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-bar"><strong>Программа 5: два выхода в зависимости от входа</strong><button class="copy" type="button" data-target="extra-src5">Скопировать</button></div>
+<pre id="extra-src5">void setup() {
+  pinMode(13, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(2, INPUT);
+}
+
+void loop() {
+  if (digitalRead(2) == HIGH) {
+    digitalWrite(13, HIGH);
+    digitalWrite(12, LOW);
+  } else {
+    digitalWrite(12, HIGH);
+    digitalWrite(13, LOW);
+  }
+}</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-bar"><strong>Программа 6: переключение состояния по сигналу</strong><button class="copy" type="button" data-target="extra-src6">Скопировать</button></div>
+<pre id="extra-src6">bool state = true;
+
+void setup() {
+  pinMode(13, OUTPUT);
+  pinMode(2, INPUT);
+}
+
+void loop() {
+  if (digitalRead(2) == HIGH) {
+    delay(300);
+    state = !state;
+  }
+
+  digitalWrite(13, state);
+}</pre>
+    </div>
+
+    <div class="hint">Важно: программы загружаются по одной. Для входа на пине 2 используйте корректную схему подключения и не оставляйте вход «в воздухе» — иначе его состояние может считываться нестабильно.</div>
+  </section>
+
   <footer>Курс по созданию умных устройств · Arduino</footer>
 </main>
 
