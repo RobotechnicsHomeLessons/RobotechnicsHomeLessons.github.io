@@ -157,7 +157,7 @@ footer { color: var(--muted); font-size: 14px; text-align: center; padding-top: 
     <div class="tasks">
       <article class="task">
         <h3><span>1</span>Одна кнопка — один светодиод</h3>
-        <p>Кнопка на D4 включает светодиод на D8.</p>
+        <p>Кнопка на D4 включает светодиод на D8. Начните с <a href="#buttons-code">кода для начала</a>.</p>
         <div class="sim" data-map="4:8"></div>
         <label class="done"><input type="checkbox" id="b1"> Сделано</label>
       </article>
@@ -199,217 +199,6 @@ footer { color: var(--muted); font-size: 14px; text-align: center; padding-top: 
       </article>
     </div>
   </section>
-
-  <section id="buttons-code">
-    <h2>Код для начала: кнопка D4 → светодиод D8</h2>
-    <div class="code-block">
-      <div class="code-bar"><strong>knopka_svetodiod.ino</strong><button class="copy" type="button" data-target="btn-src1">Скопировать</button></div>
-<pre id="btn-src1">// Кнопка на D4 включает светодиод на D8 (это задание 1).
-// Светодиод горит, пока кнопка нажата.
-
-// Названия придумали МЫ сами
-int button = 4;   // кнопка на пине D4
-int led = 8;      // светодиод на пине D8
-
-void setup() {
-  pinMode(button, INPUT);   // кнопка - ВХОД, плата читает её
-  pinMode(led, OUTPUT);     // светодиод - ВЫХОД, плата им управляет
-}
-
-void loop() {
-  // digitalRead(ОТКУДА) - читаем кнопку: 1 нажата, 0 не нажата
-  int state = digitalRead(button);
-
-  // digitalWrite(КУДА, ЧТО СДЕЛАТЬ) - отдаём светодиоду то, что прочитали
-  digitalWrite(led, state);
-}
-
-// Если светодиод горит, когда кнопка НЕ нажата,
-// напишите !state вместо state. ! значит "наоборот".</pre>
-    </div>
-  </section>
-</main>
-
-<div class="wrap"><hr style="border:0;border-top:2px solid var(--line);margin:8px auto 0"></div>
-
-<header class="wrap top">
-  <div class="eyebrow">Домашнее задание · Arduino</div>
-  <h1>Светодиоды и датчик света</h1>
-  <p>Задания и две программы. В первом коде три светодиода мигают одновременно. Меняйте только то, что внутри <code>loop()</code>.</p>
-  <div class="pins">
-    <span class="pin">LED 1 → пин 3</span>
-    <span class="pin">LED 2 → пин 6</span>
-    <span class="pin">LED 3 → пин 9</span>
-    <span class="pin">датчик → пин 2</span>
-  </div>
-</header>
-
-<nav>
-  <div class="wrap">
-    <a href="#buttons-top">ДЗ: кнопки</a>
-    <a href="#tasks">Задания</a>
-    <a href="#code1">Код 1</a>
-    <a href="#code2">Код 2</a>
-    <a href="#notebook">В тетрадь</a>
-    <a href="#materials">Материалы</a>
-  </div>
-</nav>
-
-<main class="wrap">
-
-  <section id="tasks">
-    <h2>Задания</h2>
-    <p class="lead">Отмечайте галочкой то, что получилось. Кружочки справа показывают, как должны гореть светодиоды.</p>
-
-    <div class="tasks">
-      <article class="task">
-        <div class="task-head">
-          <h3><span>1</span>Все вместе</h3>
-          <div class="leds" data-seq="111,000" aria-hidden="true"><i class="led"></i><i class="led"></i><i class="led"></i></div>
-        </div>
-        <p>Загрузите <a href="#code1">Код 1</a> и убедитесь, что все три светодиода включаются и выключаются одновременно.</p>
-        <label class="done"><input type="checkbox" id="t1"> Сделано</label>
-      </article>
-
-      <article class="task">
-        <div class="task-head">
-          <h3><span>2</span>Бегущий огонь</h3>
-          <div class="leds" data-seq="100,010,001" aria-hidden="true"><i class="led"></i><i class="led"></i><i class="led"></i></div>
-        </div>
-        <p>Светодиоды загораются по очереди: 1 → 2 → 3. Одновременно горит только один.</p>
-        <div class="hint">Подсказка: прежде чем включить следующий, выключите предыдущий. Вспомните «Светофор».</div>
-        <label class="done"><input type="checkbox" id="t2"> Сделано</label>
-      </article>
-
-      <article class="task">
-        <div class="task-head">
-          <h3><span>3</span>Шкала</h3>
-          <div class="leds" data-seq="100,110,111,100,110,111,110,100,000" aria-hidden="true"><i class="led"></i><i class="led"></i><i class="led"></i></div>
-        </div>
-        <p>Сначала горит 1, потом 1 и 2, потом 1, 2 и 3. Повторите это 2 раза, а в конце шкала «уменьшается»: 1+2+3 → 1+2 → 1.</p>
-        <label class="done"><input type="checkbox" id="t3"> Сделано</label>
-      </article>
-
-      <article class="task">
-        <div class="task-head">
-          <h3><span>4</span>Датчик света</h3>
-          <div class="leds" aria-hidden="true"><small>0 / 1</small></div>
-        </div>
-        <p>Цифровое значение — это только 0 или 1: свет есть или света нет.</p>
-        <p>Подключите датчик к пину 2 и загрузите <a href="#code2">Код 2</a>. Откройте монитор порта.</p>
-        <ul>
-          <li>Какое число вы видите, когда датчик освещён? А когда закрываете его рукой?</li>
-          <li>Переподключите датчик к пину 4, а потом к пину 10. Что нужно изменить в коде, чтобы всё снова работало?</li>
-        </ul>
-        <label class="done"><input type="checkbox" id="t4"> Сделано</label>
-      </article>
-    </div>
-  </section>
-
-  <section id="code1">
-    <h2>Код 1: три светодиода</h2>
-    <div class="code-block">
-      <div class="code-bar"><strong>tri_svetodioda.ino</strong><button class="copy" type="button" data-target="src1">Скопировать</button></div>
-<pre id="src1">// ДОМАШНЕЕ ЗАДАНИЕ. Код 1: три светодиода
-// Сейчас все три светодиода мигают ОДНОВРЕМЕННО.
-// Ваша задача: менять только то, что внутри loop().
-
-// --- Названия придумали МЫ сами. Можно назвать как угодно. ---
-// Здесь запоминаем, к какому пину подключён каждый светодиод.
-int led1 = 3;   // первый светодиод на пине 3
-int led2 = 6;   // второй светодиод на пине 6
-int led3 = 9;   // третий светодиод на пине 9
-
-// setup() выполняется ОДИН раз при включении платы.
-// setup, loop, pinMode, digitalWrite, delay - это СИСТЕМНЫЕ слова, их менять нельзя.
-void setup() {
-  pinMode(led1, OUTPUT);   // пин 3 будет ВЫДАВАТЬ сигнал
-  pinMode(led2, OUTPUT);   // пин 6 будет ВЫДАВАТЬ сигнал
-  pinMode(led3, OUTPUT);   // пин 9 будет ВЫДАВАТЬ сигнал
-}
-
-// loop() повторяется по кругу бесконечно.
-void loop() {
-  // digitalWrite(КУДА, ЧТО СДЕЛАТЬ)
-  // HIGH - включить, LOW - выключить
-
-  // Включаем все три
-  digitalWrite(led1, HIGH);
-  digitalWrite(led2, HIGH);
-  digitalWrite(led3, HIGH);
-  delay(500);   // ждём 500 миллисекунд (полсекунды)
-
-  // Выключаем все три
-  digitalWrite(led1, LOW);
-  digitalWrite(led2, LOW);
-  digitalWrite(led3, LOW);
-  delay(500);   // ждём полсекунды
-}</pre>
-    </div>
-  </section>
-
-  <section id="code2">
-    <h2>Код 2: датчик света</h2>
-    <div class="code-block">
-      <div class="code-bar"><strong>datchik_sveta.ino</strong><button class="copy" type="button" data-target="src2">Скопировать</button></div>
-<pre id="src2">// ДОМАШНЕЕ ЗАДАНИЕ. Код 2: датчик света
-// Плата читает датчик и пишет число на экран компьютера.
-// Цифровое значение - это только 0 или 1: свет есть или света нет.
-
-// Здесь запоминаем, к какому пину подключён датчик.
-// Переподключили датчик на другой пин - поменяйте число здесь!
-int sensorPin = 2;
-
-void setup() {
-  pinMode(sensorPin, INPUT);   // пин будет ПРИНИМАТЬ сигнал (вход)
-  Serial.begin(9600);          // включаем связь с компьютером
-}
-
-void loop() {
-  // digitalRead(ОТКУДА) - прочитать, что сейчас на пине: 0 или 1
-  int value = digitalRead(sensorPin);
-
-  Serial.println(value);   // написать число на экран
-  delay(200);              // ждём 0,2 секунды и читаем снова
-}
-
-// Как посмотреть числа:
-// 1. Загрузите код на плату.
-// 2. Нажмите на значок лупы в правом верхнем углу Arduino IDE
-//    (Инструменты -&gt; Монитор порта).
-// 3. Внизу окна выберите скорость 9600.</pre>
-    </div>
-  </section>
-
-  <section id="notebook">
-    <h2>В тетрадь</h2>
-    <div class="note">
-      <p>Запишите, как устроена команда:</p>
-      <div class="formula">digitalWrite(<b>пин</b>, <b>HIGH/LOW</b>)</div>
-      <p>Первое поле — <b>куда</b> (номер пина), второе — <b>что сделать</b> (включить или выключить).</p>
-      <p>И запишите, к какому пину что было подключено:</p>
-      <div class="table-wrap">
-        <table class="pin-table">
-          <thead><tr><th>Пин</th><th>Что подключено</th></tr></thead>
-          <tbody>
-            <tr><td>3</td><td>светодиод 1</td></tr>
-            <tr><td>6</td><td>светодиод 2</td></tr>
-            <tr><td>9</td><td>светодиод 3</td></tr>
-            <tr><td>2 → 4 → 10</td><td>датчик света</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <section id="materials">
-    <h2>Материалы</h2>
-    <a class="link-card" href="https://wiki.amperka.ru/конспект-arduino:маячок" target="_blank" rel="noopener noreferrer">
-      <div><strong>Эксперимент «Маячок»</strong><span>Амперка Wiki: светодиод, резистор, digitalWrite и delay</span></div>
-      <div class="arrow">→</div>
-    </a>
-  </section>
-
 
   <section id="additional-programs">
     <h2>Дополнительные программы</h2>
@@ -509,6 +298,220 @@ void loop() {
 
     <div class="hint">Важно: программы загружаются по одной. Для входа на пине 2 используйте корректную схему подключения и не оставляйте вход «в воздухе» — иначе его состояние может считываться нестабильно.</div>
   </section>
+</main>
+
+<div class="wrap"><hr style="border:0;border-top:2px solid var(--line);margin:8px auto 0"></div>
+
+<header class="wrap top">
+  <div class="eyebrow">Домашнее задание · Arduino</div>
+  <h1>Светодиоды и датчик света</h1>
+  <p>Задания и две программы. В первом коде три светодиода мигают одновременно. Меняйте только то, что внутри <code>loop()</code>.</p>
+  <div class="pins">
+    <span class="pin">LED 1 → пин 3</span>
+    <span class="pin">LED 2 → пин 6</span>
+    <span class="pin">LED 3 → пин 9</span>
+    <span class="pin">датчик → пин 2</span>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#buttons-top">ДЗ: кнопки</a>
+    <a href="#additional-programs">Доп. программы</a>
+    <a href="#tasks">Задания</a>
+    <a href="#code1">Код 1</a>
+    <a href="#buttons-code">Код: кнопка</a>
+    <a href="#code2">Код 2</a>
+    <a href="#notebook">В тетрадь</a>
+    <a href="#materials">Материалы</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="tasks">
+    <h2>Задания</h2>
+    <p class="lead">Отмечайте галочкой то, что получилось. Кружочки справа показывают, как должны гореть светодиоды.</p>
+
+    <div class="tasks">
+      <article class="task">
+        <div class="task-head">
+          <h3><span>1</span>Все вместе</h3>
+          <div class="leds" data-seq="111,000" aria-hidden="true"><i class="led"></i><i class="led"></i><i class="led"></i></div>
+        </div>
+        <p>Загрузите <a href="#code1">Код 1</a> и убедитесь, что все три светодиода включаются и выключаются одновременно.</p>
+        <label class="done"><input type="checkbox" id="t1"> Сделано</label>
+      </article>
+
+      <article class="task">
+        <div class="task-head">
+          <h3><span>2</span>Бегущий огонь</h3>
+          <div class="leds" data-seq="100,010,001" aria-hidden="true"><i class="led"></i><i class="led"></i><i class="led"></i></div>
+        </div>
+        <p>Светодиоды загораются по очереди: 1 → 2 → 3. Одновременно горит только один.</p>
+        <div class="hint">Подсказка: прежде чем включить следующий, выключите предыдущий. Вспомните «Светофор».</div>
+        <label class="done"><input type="checkbox" id="t2"> Сделано</label>
+      </article>
+
+      <article class="task">
+        <div class="task-head">
+          <h3><span>3</span>Шкала</h3>
+          <div class="leds" data-seq="100,110,111,100,110,111,110,100,000" aria-hidden="true"><i class="led"></i><i class="led"></i><i class="led"></i></div>
+        </div>
+        <p>Сначала горит 1, потом 1 и 2, потом 1, 2 и 3. Повторите это 2 раза, а в конце шкала «уменьшается»: 1+2+3 → 1+2 → 1.</p>
+        <label class="done"><input type="checkbox" id="t3"> Сделано</label>
+      </article>
+
+      <article class="task">
+        <div class="task-head">
+          <h3><span>4</span>Датчик света</h3>
+          <div class="leds" aria-hidden="true"><small>0 / 1</small></div>
+        </div>
+        <p>Цифровое значение — это только 0 или 1: свет есть или света нет.</p>
+        <p>Подключите датчик к пину 2 и загрузите <a href="#code2">Код 2</a>. Откройте монитор порта.</p>
+        <ul>
+          <li>Какое число вы видите, когда датчик освещён? А когда закрываете его рукой?</li>
+          <li>Переподключите датчик к пину 4, а потом к пину 10. Что нужно изменить в коде, чтобы всё снова работало?</li>
+        </ul>
+        <label class="done"><input type="checkbox" id="t4"> Сделано</label>
+      </article>
+    </div>
+  </section>
+
+  <section id="code1">
+    <h2>Код 1: три светодиода</h2>
+    <div class="code-block">
+      <div class="code-bar"><strong>tri_svetodioda.ino</strong><button class="copy" type="button" data-target="src1">Скопировать</button></div>
+<pre id="src1">// ДОМАШНЕЕ ЗАДАНИЕ. Код 1: три светодиода
+// Сейчас все три светодиода мигают ОДНОВРЕМЕННО.
+// Ваша задача: менять только то, что внутри loop().
+
+// --- Названия придумали МЫ сами. Можно назвать как угодно. ---
+// Здесь запоминаем, к какому пину подключён каждый светодиод.
+int led1 = 3;   // первый светодиод на пине 3
+int led2 = 6;   // второй светодиод на пине 6
+int led3 = 9;   // третий светодиод на пине 9
+
+// setup() выполняется ОДИН раз при включении платы.
+// setup, loop, pinMode, digitalWrite, delay - это СИСТЕМНЫЕ слова, их менять нельзя.
+void setup() {
+  pinMode(led1, OUTPUT);   // пин 3 будет ВЫДАВАТЬ сигнал
+  pinMode(led2, OUTPUT);   // пин 6 будет ВЫДАВАТЬ сигнал
+  pinMode(led3, OUTPUT);   // пин 9 будет ВЫДАВАТЬ сигнал
+}
+
+// loop() повторяется по кругу бесконечно.
+void loop() {
+  // digitalWrite(КУДА, ЧТО СДЕЛАТЬ)
+  // HIGH - включить, LOW - выключить
+
+  // Включаем все три
+  digitalWrite(led1, HIGH);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led3, HIGH);
+  delay(500);   // ждём 500 миллисекунд (полсекунды)
+
+  // Выключаем все три
+  digitalWrite(led1, LOW);
+  digitalWrite(led2, LOW);
+  digitalWrite(led3, LOW);
+  delay(500);   // ждём полсекунды
+}</pre>
+    </div>
+  </section>
+
+  <section id="buttons-code">
+    <h2>Код для начала: кнопка D4 → светодиод D8</h2>
+    <div class="code-block">
+      <div class="code-bar"><strong>knopka_svetodiod.ino</strong><button class="copy" type="button" data-target="btn-src1">Скопировать</button></div>
+<pre id="btn-src1">// Кнопка на D4 включает светодиод на D8 (это задание 1).
+// Светодиод горит, пока кнопка нажата.
+
+// Названия придумали МЫ сами
+int button = 4;   // кнопка на пине D4
+int led = 8;      // светодиод на пине D8
+
+void setup() {
+  pinMode(button, INPUT);   // кнопка - ВХОД, плата читает её
+  pinMode(led, OUTPUT);     // светодиод - ВЫХОД, плата им управляет
+}
+
+void loop() {
+  // digitalRead(ОТКУДА) - читаем кнопку: 1 нажата, 0 не нажата
+  int state = digitalRead(button);
+
+  // digitalWrite(КУДА, ЧТО СДЕЛАТЬ) - отдаём светодиоду то, что прочитали
+  digitalWrite(led, state);
+}
+
+// Если светодиод горит, когда кнопка НЕ нажата,
+// напишите !state вместо state. ! значит "наоборот".</pre>
+    </div>
+  </section>
+
+  <section id="code2">
+    <h2>Код 2: датчик света</h2>
+    <div class="code-block">
+      <div class="code-bar"><strong>datchik_sveta.ino</strong><button class="copy" type="button" data-target="src2">Скопировать</button></div>
+<pre id="src2">// ДОМАШНЕЕ ЗАДАНИЕ. Код 2: датчик света
+// Плата читает датчик и пишет число на экран компьютера.
+// Цифровое значение - это только 0 или 1: свет есть или света нет.
+
+// Здесь запоминаем, к какому пину подключён датчик.
+// Переподключили датчик на другой пин - поменяйте число здесь!
+int sensorPin = 2;
+
+void setup() {
+  pinMode(sensorPin, INPUT);   // пин будет ПРИНИМАТЬ сигнал (вход)
+  Serial.begin(9600);          // включаем связь с компьютером
+}
+
+void loop() {
+  // digitalRead(ОТКУДА) - прочитать, что сейчас на пине: 0 или 1
+  int value = digitalRead(sensorPin);
+
+  Serial.println(value);   // написать число на экран
+  delay(200);              // ждём 0,2 секунды и читаем снова
+}
+
+// Как посмотреть числа:
+// 1. Загрузите код на плату.
+// 2. Нажмите на значок лупы в правом верхнем углу Arduino IDE
+//    (Инструменты -&gt; Монитор порта).
+// 3. Внизу окна выберите скорость 9600.</pre>
+    </div>
+  </section>
+
+  <section id="notebook">
+    <h2>В тетрадь</h2>
+    <div class="note">
+      <p>Запишите, как устроена команда:</p>
+      <div class="formula">digitalWrite(<b>пин</b>, <b>HIGH/LOW</b>)</div>
+      <p>Первое поле — <b>куда</b> (номер пина), второе — <b>что сделать</b> (включить или выключить).</p>
+      <p>И запишите, к какому пину что было подключено:</p>
+      <div class="table-wrap">
+        <table class="pin-table">
+          <thead><tr><th>Пин</th><th>Что подключено</th></tr></thead>
+          <tbody>
+            <tr><td>3</td><td>светодиод 1</td></tr>
+            <tr><td>6</td><td>светодиод 2</td></tr>
+            <tr><td>9</td><td>светодиод 3</td></tr>
+            <tr><td>2 → 4 → 10</td><td>датчик света</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="materials">
+    <h2>Материалы</h2>
+    <a class="link-card" href="https://wiki.amperka.ru/конспект-arduino:маячок" target="_blank" rel="noopener noreferrer">
+      <div><strong>Эксперимент «Маячок»</strong><span>Амперка Wiki: светодиод, резистор, digitalWrite и delay</span></div>
+      <div class="arrow">→</div>
+    </a>
+  </section>
+
+
 
   <footer>Курс по созданию умных устройств · Arduino</footer>
 </main>
