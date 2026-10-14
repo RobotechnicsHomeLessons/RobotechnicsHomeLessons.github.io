@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>ДЗ №2: светодиоды и датчик</title>
+<title>ДЗ: кнопки и светодиоды</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -121,8 +121,116 @@ pre .k { color: var(--code-key); }
 
 footer { color: var(--muted); font-size: 14px; text-align: center; padding-top: 16px; border-top: 1px solid var(--line); }
 
+
+/* button simulator */
+.sim { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 12px 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; }
+.sim-group { display: flex; gap: 10px; flex-wrap: wrap; }
+.sim-arrow { color: var(--muted); font-size: 18px; }
+.sbtn { display: grid; justify-items: center; gap: 4px; background: none; border: 0; padding: 0; cursor: pointer; font: 12px var(--font-mono); color: var(--muted); touch-action: manipulation; -webkit-user-select: none; user-select: none; }
+.sbtn .cap { width: 30px; height: 30px; border-radius: 8px; background: var(--surface); border: 2px solid var(--line); box-shadow: 0 4px 0 var(--line); transition: transform .08s, box-shadow .08s, background .08s; }
+.sbtn.on .cap { transform: translateY(4px); box-shadow: 0 0 0 var(--line); background: var(--accent); border-color: var(--accent); }
+.sbtn.on { color: var(--accent); font-weight: 600; }
+.sled { display: grid; justify-items: center; gap: 4px; font: 12px var(--font-mono); color: var(--muted); }
+.sled i { width: 20px; height: 20px; border-radius: 50%; background: var(--led-off); transition: background .1s, box-shadow .1s; }
+.sled.on i { background: var(--led-red); box-shadow: 0 0 12px var(--led-red); }
+.sled.on { color: var(--fg); }
+@media (prefers-reduced-motion: reduce) { .sbtn .cap, .sled i { transition: none; } }
+
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .led { transition: none; } }
 </style>
+
+<header class="wrap top" id="buttons-top">
+  <div class="eyebrow">Домашнее задание · кнопки</div>
+  <h1>Кнопки и светодиоды</h1>
+  <p>На занятии мы сделали две кнопки и три светодиода. Теперь меняем, какая кнопка какие светодиоды включает. Светодиод горит, пока кнопка нажата.</p>
+  <div class="pins">
+    <span class="pin">кнопка → D3, D4</span>
+    <span class="pin">светодиоды → D5, D7, D8, D9, D10</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="buttons">
+    <div class="hint">В коде номер пина пишется без буквы: <code>D8</code> на плате — это <code>8</code> в программе.</div>
+
+    <p class="lead" style="margin-top:14px">Анимация показывает, что должно получиться. Кнопки можно нажимать самим: зажмите кнопку, и светодиоды загорятся.</p>
+    <div class="tasks">
+      <article class="task">
+        <h3><span>1</span>Одна кнопка — один светодиод</h3>
+        <p>Кнопка на D4 включает светодиод на D8.</p>
+        <div class="sim" data-map="4:8"></div>
+        <label class="done"><input type="checkbox" id="b1"> Сделано</label>
+      </article>
+
+      <article class="task">
+        <h3><span>2</span>Одна кнопка — два светодиода</h3>
+        <p>Кнопка на D4 включает светодиоды на D8 и D9.</p>
+        <div class="sim" data-map="4:8,9"></div>
+        <label class="done"><input type="checkbox" id="b2"> Сделано</label>
+      </article>
+
+      <article class="task">
+        <h3><span>3</span>Две кнопки</h3>
+        <p>Кнопка на D4 включает D8 и D9, а кнопка на D3 включает D8.</p>
+        <div class="hint">Подвох: обе кнопки управляют светодиодом D8. Если одна кнопка его включает, а другая тут же выключает, он будет мерцать или не загорится. Подсказка: в начале <code>loop()</code> выключите все светодиоды, а потом включите только те, чьи кнопки нажаты.</div>
+        <div class="sim" data-map="4:8,9;3:8"></div>
+        <label class="done"><input type="checkbox" id="b3"> Сделано</label>
+      </article>
+
+      <article class="task">
+        <h3><span>4</span>Две кнопки, общий светодиод</h3>
+        <p>Кнопка на D4 включает D8 и D9, а кнопка на D3 включает D8 и D7.</p>
+        <div class="sim" data-map="4:8,9;3:8,7"></div>
+        <label class="done"><input type="checkbox" id="b4"> Сделано</label>
+      </article>
+
+      <article class="task">
+        <h3><span>5 ★</span>Три светодиода</h3>
+        <p>Кнопка на D4 включает светодиоды на D8, D9 и D10.</p>
+        <div class="sim" data-map="4:8,9,10"></div>
+        <label class="done"><input type="checkbox" id="b5"> Сделано</label>
+      </article>
+
+      <article class="task">
+        <h3><span>6 ★</span>Пять светодиодов</h3>
+        <p>Кнопка на D4 включает D8, D9 и D10, а кнопка на D3 включает D5 и D7.</p>
+        <div class="sim" data-map="4:8,9,10;3:5,7"></div>
+        <label class="done"><input type="checkbox" id="b6"> Сделано</label>
+      </article>
+    </div>
+  </section>
+
+  <section id="buttons-code">
+    <h2>Код для начала: кнопка D4 → светодиод D8</h2>
+    <div class="code-block">
+      <div class="code-bar"><strong>knopka_svetodiod.ino</strong><button class="copy" type="button" data-target="btn-src1">Скопировать</button></div>
+<pre id="btn-src1">// Кнопка на D4 включает светодиод на D8 (это задание 1).
+// Светодиод горит, пока кнопка нажата.
+
+// Названия придумали МЫ сами
+int button = 4;   // кнопка на пине D4
+int led = 8;      // светодиод на пине D8
+
+void setup() {
+  pinMode(button, INPUT);   // кнопка - ВХОД, плата читает её
+  pinMode(led, OUTPUT);     // светодиод - ВЫХОД, плата им управляет
+}
+
+void loop() {
+  // digitalRead(ОТКУДА) - читаем кнопку: 1 нажата, 0 не нажата
+  int state = digitalRead(button);
+
+  // digitalWrite(КУДА, ЧТО СДЕЛАТЬ) - отдаём светодиоду то, что прочитали
+  digitalWrite(led, state);
+}
+
+// Если светодиод горит, когда кнопка НЕ нажата,
+// напишите !state вместо state. ! значит "наоборот".</pre>
+    </div>
+  </section>
+</main>
+
+<div class="wrap"><hr style="border:0;border-top:2px solid var(--line);margin:8px auto 0"></div>
 
 <header class="wrap top">
   <div class="eyebrow">Домашнее задание · Arduino</div>
@@ -138,6 +246,7 @@ footer { color: var(--muted); font-size: 14px; text-align: center; padding-top: 
 
 <nav>
   <div class="wrap">
+    <a href="#buttons-top">ДЗ: кнопки</a>
     <a href="#tasks">Задания</a>
     <a href="#code1">Код 1</a>
     <a href="#code2">Код 2</a>
@@ -443,6 +552,71 @@ document.querySelectorAll('.leds[data-seq]').forEach(function (box) {
   var show = function (f) { leds.forEach(function (l, i) { l.classList.toggle('on', f[i] === '1'); }); };
   show(frames[0]);
   if (!reduce) setInterval(function () { n = (n + 1) % frames.length; show(frames[n]); }, 500);
+});
+
+
+// Симулятор кнопок
+document.querySelectorAll('.sim').forEach(function (sim) {
+  var map = {}, buttons = [], ledSet = {};
+  sim.dataset.map.split(';').forEach(function (part) {
+    var kv = part.split(':'); var b = kv[0];
+    map[b] = kv[1].split(','); buttons.push(b);
+    map[b].forEach(function (l) { ledSet[l] = true; });
+  });
+  buttons.sort(function (a, b) { return b - a; });
+  var leds = Object.keys(ledSet).sort(function (a, b) { return a - b; });
+
+  var bg = document.createElement('div'); bg.className = 'sim-group';
+  var btnEls = {};
+  buttons.forEach(function (b) {
+    var el = document.createElement('button'); el.type = 'button'; el.className = 'sbtn';
+    el.setAttribute('aria-label', 'Кнопка D' + b);
+    el.innerHTML = '<span class="cap"></span>D' + b;
+    bg.appendChild(el); btnEls[b] = el;
+  });
+  var ar = document.createElement('span'); ar.className = 'sim-arrow'; ar.textContent = '→'; ar.setAttribute('aria-hidden', 'true');
+  var lg = document.createElement('div'); lg.className = 'sim-group';
+  var ledEls = {};
+  leds.forEach(function (l) {
+    var el = document.createElement('span'); el.className = 'sled';
+    el.innerHTML = '<i></i>D' + l; lg.appendChild(el); ledEls[l] = el;
+  });
+  sim.append(bg, ar, lg);
+
+  var show = function (pressed) {
+    buttons.forEach(function (b) { btnEls[b].classList.toggle('on', pressed.indexOf(b) !== -1); });
+    leds.forEach(function (l) {
+      var on = pressed.some(function (b) { return map[b].indexOf(l) !== -1; });
+      ledEls[l].classList.toggle('on', on);
+    });
+  };
+
+  // Автоматическая анимация: ничего → D4 → ничего → D3 → ничего → обе
+  var frames = [[], [buttons[0]]];
+  if (buttons.length > 1) frames.push([], [buttons[1]], [], buttons.slice());
+  var n = 1, manual = [], timer = null;
+  show(frames[1]);
+  var start = function () {
+    if (reduce || timer) return;
+    timer = setInterval(function () { n = (n + 1) % frames.length; show(frames[n]); }, 800);
+  };
+  var stop = function () { clearInterval(timer); timer = null; };
+  start();
+
+  // Ручное нажатие
+  buttons.forEach(function (b) {
+    var el = btnEls[b];
+    var down = function (e) { e.preventDefault(); stop(); if (manual.indexOf(b) === -1) manual.push(b); show(manual); };
+    var up = function () {
+      manual = manual.filter(function (x) { return x !== b; }); show(manual);
+      if (!manual.length) { clearTimeout(sim._t); sim._t = setTimeout(start, 2500); }
+    };
+    el.addEventListener('pointerdown', down);
+    el.addEventListener('pointerup', up);
+    el.addEventListener('pointerleave', function () { if (manual.indexOf(b) !== -1) up(); });
+    el.addEventListener('keydown', function (e) { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) down(e); });
+    el.addEventListener('keyup', function (e) { if (e.key === ' ' || e.key === 'Enter') up(); });
+  });
 });
 
 // Галочки запоминаются в этом браузере
