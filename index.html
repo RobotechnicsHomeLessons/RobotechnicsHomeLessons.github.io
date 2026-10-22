@@ -154,7 +154,7 @@ footer { color: var(--muted); font-size: 14px; text-align: center; padding-top: 
     <div class="note" style="margin-bottom:14px">
       <p>Как устроен <code>if</code>:</p>
       <div class="formula">if (<b>условие</b>) { <b>что сделать</b> } else { <b>что сделать иначе</b> }</div>
-      <p><code>==</code> значит «сравнить», <code>=</code> значит «положить в переменную». В условии пишем <code>==</code>.</p>
+      <p><code>if (digitalRead(4))</code> значит «если кнопка на D4 нажата».</p>
     </div>
     <div class="code-block">
       <div class="code-bar"><strong>Пример: задание 1 через if</strong><button class="copy" type="button" data-target="if-src1">Скопировать</button></div>
@@ -166,7 +166,7 @@ void setup() {
 }
 
 void loop() {
-  if (digitalRead(4) == HIGH) {   // ЕСЛИ кнопка нажата
+  if (digitalRead(4)) {           // ЕСЛИ кнопка нажата
     digitalWrite(8, HIGH);        // включить светодиод
   } else {                        // ИНАЧЕ
     digitalWrite(8, LOW);         // выключить светодиод
@@ -370,7 +370,7 @@ void setup() {
 }
 
 void loop() {
-  if (digitalRead(4) == HIGH) {
+  if (digitalRead(4)) {
     delay(200);
     state = !state;
   }
@@ -389,7 +389,7 @@ void setup() {
 }
 
 void loop() {
-  if (digitalRead(4) == LOW) {
+  if (!digitalRead(4)) {   // ! значит "наоборот": с INPUT_PULLUP нажатая кнопка даёт 0
     delay(200);
     state = !state;
   }
